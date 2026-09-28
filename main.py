@@ -197,5 +197,26 @@ st.markdown("**이 그래프로 알 수 있는 것:** (여기에 한 문장을 �
 st.divider()
 
 # ------------------------------------------------------------
-# 구역 7. 다음 그래프가 들어갈 자리
+# 구역 7. 제작 국가에서 장르로 (선버스트)
+# ------------------------------------------------------------
+st.header("7. 제작 국가별 장르 구성")
+
+sun_df = df.copy()
+sun_df["nation"] = sun_df["nation"].fillna("미상").astype(str)
+sun_counts = sun_df.groupby(["nation", "genre"]).size().reset_index(name="count")
+
+fig7 = px.sunburst(sun_counts, path=["nation", "genre"], values="count")
+fig7.update_traces(
+    hovertemplate="%{label}<br>%{value}편<extra></extra>",
+    textinfo="label",
+)
+fig7.update_layout(margin=dict(t=10, l=10, r=10, b=10), height=600)
+st.plotly_chart(fig7, use_container_width=True)
+
+st.markdown("**이 그래프로 알 수 있는 것:** (여기에 한 문장을 적어 주세요.)")
+
+st.divider()
+
+# ------------------------------------------------------------
+# 구역 8. 다음 그래프가 들어갈 자리
 # ------------------------------------------------------------
